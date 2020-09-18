@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String dataFullName = data['full_name'];
     String dataCreatedAt = data['createdAt'];
     String dataIdUser = data['id_user'];
+    String dataProfession = data['profession'];
 
     // cek value 1 atau 0 atau 2
     if (value == 1) {
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // simpan data ke share preferends
         saveDataPref(value, dataIdUser, dataUsername, dataEmail, dataAddress,
-            dataGender, dataFullName, dataCreatedAt);
+            dataGender, dataFullName, dataCreatedAt, dataProfession);
       });
     } else {
       Flushbar(
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   saveDataPref(int value, String idUser, username, email, address, gender,
-      fullName, createdAt) async {
+      fullName, createdAt, profession) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     setState(() {
@@ -94,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
       sharedPreferences.setString('gender', gender);
       sharedPreferences.setString('createdAt', createdAt);
       sharedPreferences.setString('id_user', idUser);
+      sharedPreferences.setString('profession', profession);
     });
   }
 

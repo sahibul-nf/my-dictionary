@@ -21,6 +21,8 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   String imageFile = '';
   String username = '';
+  String profession = '';
+  String gender = '';
 
   statusLogin sstatusLogin;
 
@@ -43,6 +45,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
     setState(() {
       imageFile = sharedPreferences.getString('img');
       username = sharedPreferences.getString('username');
+      gender = sharedPreferences.getString('gender');
+      profession = sharedPreferences.getString('profession');
 
       print('file : ${sharedPreferences.getString('img')}');
     });
@@ -57,7 +61,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(imageFile);
+    print(gender);
     return Scaffold(
       body: Stack(
         children: [
@@ -90,7 +94,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       height: 6,
                     ),
                     Text(
-                      'Flutter Developer',
+                      (profession == '') ? 'Flutter Developer' : '$profession',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.sourceSansPro(
                         color: Colors.black54,
@@ -106,11 +110,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment(0, -0.66),
-            child: Stack(
-              children: [
-                Container(
+          Stack(
+            children: [
+              Align(
+                alignment: Alignment(0, -0.66),
+                child: Container(
                   height: 105,
                   width: 105,
                   decoration: BoxDecoration(
@@ -118,9 +122,39 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     borderRadius: BorderRadius.circular(100),
                   ),
                 ),
-                Icon(Icons.account_circle, size: 105, color: MyColor().color3),
-              ],
-            ),
+              ),
+              (gender == 'Male')
+                  ? Align(
+                      alignment: Alignment(0, -0.64),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          height: 90,
+                          width: 90,
+                          color: MyColor().color2,
+                          child: Image.asset(
+                            'images/male.png',
+                            height: 90,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    )
+                  : (gender == 'Female')
+                      ? Align(
+                          alignment: Alignment(0, -0.64),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset(
+                              'images/female.png',
+                              height: 90,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        )
+                      : Icon(Icons.account_circle,
+                          size: 105, color: MyColor().color3),
+            ],
           ),
           Align(
             alignment: Alignment(0, 0.5),

@@ -22,15 +22,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _keyForm = GlobalKey<FormState>();
 
   bool securer = false;
-  Icon iconSecure = Icon(OMIcons.visibility, color: Colors.indigo[100]);
+  Icon iconSecure = Icon(LineIcons.eye, color: Colors.indigo[100]);
 
   var usernameC = TextEditingController();
   var fullNameC = TextEditingController();
   var emailC = TextEditingController();
   var passwordC = TextEditingController();
   var addressC = TextEditingController();
+  var professionC = TextEditingController();
 
-  String usernameN, fullNameN, emailN, passwordN, addressN;
+  String usernameN, fullNameN, emailN, passwordN, addressN, professionN;
   String genderN = '';
   File imageFile;
   // File image;
@@ -38,13 +39,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // String base64Image;
   // String errMsg = 'Error Uploading Image';
 
-  setDataPref() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  // setDataPref() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    setState(() {
-      sharedPreferences.setString('img', imageFile.toString());
-    });
-  }
+  //   setState(() {
+  //     sharedPreferences.setString('img', imageFile.toString());
+  //   });
+  // }
 
   void selectGender(String value) {
     setState(() {
@@ -94,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'password': passwordN,
       'address': addressN,
       'gender': genderN,
+      'profession': professionN
     });
 
     final data = jsonDecode(apiResult.body);
@@ -282,7 +284,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: MyColor().color1, decoration: TextDecoration.none),
                   decoration: InputDecoration(
                       prefixIcon: Icon(
-                        OMIcons.personOutline,
+                        LineIcons.user,
                         color: MyColor().color2,
                       ),
                       hintText: 'Your Name',
@@ -366,7 +368,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: MyColor().color1, decoration: TextDecoration.none),
                   decoration: InputDecoration(
                       prefixIcon: Icon(
-                        OMIcons.email,
+                        LineIcons.envelope,
                         color: MyColor().color2,
                       ),
                       hintText: 'Your Email',
@@ -408,14 +410,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (securer == true) {
                       setState(() {
                         securer = false;
-                        iconSecure = Icon(OMIcons.visibilityOff,
+                        iconSecure = Icon(LineIcons.eye_slash,
                             color: Colors.indigo[100]);
                       });
                     } else {
                       setState(() {
                         securer = true;
                         iconSecure =
-                            Icon(OMIcons.visibility, color: Colors.indigo[100]);
+                            Icon(LineIcons.eye, color: Colors.indigo[100]);
                       });
                     }
                   },
@@ -426,13 +428,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   decoration: InputDecoration(
                       suffixIcon: iconSecure,
                       prefixIcon: Icon(
-                        OMIcons.lock,
+                        LineIcons.lock,
                         color: MyColor().color2,
                       ),
                       hintText: 'Your Password',
                       hintStyle:
                           GoogleFonts.sourceSansPro(color: Colors.indigo[100]),
                       labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.indigo[100]),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2, color: Colors.pink),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 2, color: Colors.pink),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2, color: Colors.indigo[100]),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: MyColor().color2),
+                          borderRadius: BorderRadius.circular(8))),
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top: 16),
+                child: TextFormField(
+                  controller: professionC,
+                  validator: (value) =>
+                      (value.isEmpty) ? 'Please input your profession' : null,
+                  onSaved: (value) => professionN = professionC.text,
+                  cursorColor: Colors.indigo[100],
+                  style: GoogleFonts.sourceSansPro(
+                      color: MyColor().color1, decoration: TextDecoration.none),
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        LineIcons.industry,
+                        color: MyColor().color2,
+                      ),
+                      hintText: 'Your Profession',
+                      hintStyle:
+                          GoogleFonts.sourceSansPro(color: Colors.indigo[100]),
+                      labelText: 'Profession',
                       labelStyle: TextStyle(color: Colors.indigo[100]),
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 2, color: Colors.pink),
@@ -467,7 +509,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: MyColor().color1, decoration: TextDecoration.none),
                   decoration: InputDecoration(
                       prefixIcon: Icon(
-                        OMIcons.place,
+                        LineIcons.map_marker,
                         color: MyColor().color2,
                       ),
                       hintText: 'Your Address',
