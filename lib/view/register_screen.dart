@@ -8,10 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:my_dictionary/controller/color.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
+// import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker_gallery_camera/image_picker_gallery_camera.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -87,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   submitDataRegister() async {
-    String urlAPI = 'http://192.168.43.208/my-dictionary-server/register.php';
+    String urlAPI = 'https://40c17614ccd1.ngrok.io/my-dictionary-server/register.php';
     final apiResult = await http.post(urlAPI, body: {
       'username': usernameN,
       'full_name': fullNameN,
@@ -260,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: CircleAvatar(
                                 backgroundColor: Colors.pink,
                                 radius: 15,
-                                child: Icon(OMIcons.cancel,
+                                child: Icon(LineIcons.xing,
                                     size: 30, color: MyColor().color5),
                               ),
                             ),
@@ -324,7 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: MyColor().color1, decoration: TextDecoration.none),
                   decoration: InputDecoration(
                       prefixIcon: Icon(
-                        OMIcons.accountCircle,
+                        LineIcons.user,
                         color: MyColor().color2,
                       ),
                       hintText: 'Your Username',

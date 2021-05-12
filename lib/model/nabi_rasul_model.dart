@@ -18,7 +18,8 @@ class NabiRasul {
   }
 
   static Future<List<NabiRasul>> getData() async {
-    String urlAPI = 'http://192.168.43.208/my-dictionary-server/get_data.php';
+    // http://192.168.43.208/my-dictionary-server/get_data.php
+    String urlAPI = 'https://40c17614ccd1.ngrok.io/my-dictionary-server/get_data.php';
     final apiResult = await http.get(urlAPI);
     List<dynamic> jsonObject = jsonDecode(apiResult.body);
 

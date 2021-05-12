@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:my_dictionary/controller/color.dart';
 import 'package:my_dictionary/view/activity_screen.dart';
 import 'package:my_dictionary/view/home_screen.dart';
 import 'package:my_dictionary/view/user_profile_screen.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
+// import 'package:outline_material_icons/outline_material_icons.dart';
 
 class BaseScreen extends StatefulWidget {
   
@@ -35,9 +36,7 @@ class _BaseScreenState extends State<BaseScreen> {
   ];
 
   double iconSize = 30;
-
-  UserProfilePage iconP = UserProfilePage();
-
+  
   int _cIndex = 0;
 
   @override
@@ -60,21 +59,21 @@ class _BaseScreenState extends State<BaseScreen> {
             currentIndex: _cIndex,
             items: [
               BottomNavigationBarItem(
-                icon: (_cIndex == 0) ? Icon(Icons.home) : Icon(OMIcons.home),
+                icon: (_cIndex == 0) ? Icon(Icons.home) : Icon(LineIcons.home),
                 title: Text('Home',
                     style: GoogleFonts.sourceSansPro(fontSize: 14)),
               ),
               BottomNavigationBarItem(
                 icon: (_cIndex == 1)
                     ? Icon(Icons.favorite)
-                    : Icon(OMIcons.favoriteBorder),
+                    : Icon(LineIcons.heart_o),
                 title: Text('Activity',
                     style: GoogleFonts.sourceSansPro(fontSize: 14)),
               ),
               BottomNavigationBarItem(
                 icon: (_cIndex == 2)
                     ? Icon(Icons.account_circle)
-                    : Icon(OMIcons.accountCircle),
+                    : Icon(LineIcons.user),
                 title: Text('Account',
                     style: GoogleFonts.sourceSansPro(fontSize: 14)),
               )

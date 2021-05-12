@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:my_dictionary/controller/color.dart';
 import 'package:my_dictionary/view/base_screen.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
+// import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   statusLogin _loginStatus = statusLogin.notSignIn;
 
   bool securer = false;
-  Icon iconSecure = Icon(OMIcons.visibility, color: Colors.indigo[100]);
+  Icon iconSecure = Icon(LineIcons.eye, color: Colors.indigo[100]);
 
   String usernameN, passwordN;
 
@@ -37,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // mengirim request dan menanggapinya
   submitDataLogin() async {
-    String urlAPI = 'http://192.168.43.208/my-dictionary-server/login.php';
+    String urlAPI = 'https://40c17614ccd1.ngrok.io/my-dictionary-server/login.php';
     final apiResult = await http.post(
       urlAPI,
       body: {'username': usernameN, 'password': passwordN},
@@ -184,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: TextDecoration.none),
                       decoration: InputDecoration(
                           prefixIcon: Icon(
-                            OMIcons.accountCircle,
+                            LineIcons.user,
                             color: MyColor().color2,
                           ),
                           hintText: 'Your Username',
@@ -227,13 +228,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (securer == true) {
                           setState(() {
                             securer = false;
-                            iconSecure = Icon(OMIcons.visibilityOff,
+                            iconSecure = Icon(LineIcons.eye_slash,
                                 color: Colors.indigo[100]);
                           });
                         } else {
                           setState(() {
                             securer = true;
-                            iconSecure = Icon(OMIcons.visibility,
+                            iconSecure = Icon(LineIcons.eye,
                                 color: Colors.indigo[100]);
                           });
                         }
@@ -246,7 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                           suffixIcon: iconSecure,
                           prefixIcon: Icon(
-                            OMIcons.lock,
+                            LineIcons.lock,
                             color: MyColor().color2,
                           ),
                           hintText: 'Your Password',
